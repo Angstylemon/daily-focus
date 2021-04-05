@@ -67,6 +67,12 @@ function SelectWidgetsModal({ selectedWidgets, setSelectedWidgets }) {
                             selectedWidgets={selectedWidgets}
                             setSelectedWidgets={setSelectedWidgets}
                         />
+                        <WidgetIcon
+                            image={timer}
+                            label="Quote Of The Day"
+                            selectedWidgets={selectedWidgets}
+                            setSelectedWidgets={setSelectedWidgets}
+                        />
                     </Grid>
                 </DialogContent>
             </Dialog>
