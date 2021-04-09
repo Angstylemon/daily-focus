@@ -12,7 +12,7 @@ async function fetchKanyeQuote(setText, setAuthor) {
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -32,7 +32,7 @@ async function fetchChuckNorrisQuote(setText, setAuthor) {
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -52,7 +52,7 @@ async function fetchProgrammingQuote(setText, setAuthor) {
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -72,7 +72,7 @@ async function fetchTaylorSwiftQuote(setText, setAuthor) {
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -92,7 +92,7 @@ async function fetchAnimeQuote(setText, setAuthor) {
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
