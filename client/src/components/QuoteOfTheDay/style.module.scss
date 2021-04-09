@@ -54,4 +54,16 @@
         margin-right: 10px;
         margin-bottom: 10px;
     }
+
+    .loading {
+        width: 100%;
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            color: #30a0f5;
+        }
+    }
 }
