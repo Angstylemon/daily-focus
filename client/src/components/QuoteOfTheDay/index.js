@@ -1,118 +1,70 @@
 import React, { useEffect, useState } from "react";
-import { Fab } from "@material-ui/core";
+import { Fab, CircularProgress } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import style from "./style.module.scss";
 import SwitchCategory from "./SwitchCategory";
+import {
+    fetchKanyeQuote,
+    fetchChuckNorrisQuote,
+    fetchTaylorSwiftQuote,
+    fetchProgrammingQuote,
+    fetchAnimeQuote,
+} from "./quoteService";
+
+const quoteCategories = [
+    {
+        value: "chuck-norris",
+        text: "Chuck Norris",
+        fetchQuote: (textHandler, authorHandler) =>
+            fetchChuckNorrisQuote(textHandler, authorHandler),
+    },
+    {
+        value: "taylor-swift",
+        text: "Taylor Swift",
+        fetchQuote: (textHandler, authorHandler) =>
+            fetchTaylorSwiftQuote(textHandler, authorHandler),
+    },
+    {
+        value: "kanye-west",
+        text: "Kanye West",
+        fetchQuote: (textHandler, authorHandler) => fetchKanyeQuote(textHandler, authorHandler),
+    },
+    {
+        value: "programming",
+        text: "Programming",
+        fetchQuote: (textHandler, authorHandler) =>
+            fetchProgrammingQuote(textHandler, authorHandler),
+    },
+    {
+        value: "anime",
+        text: "Anime ( ͡° ͜ʖ ͡°)",
+        fetchQuote: (textHandler, authorHandler) => fetchAnimeQuote(textHandler, authorHandler),
+    },
+];
 
 export default function QuoteOfTheDay() {
-    const [text, setText] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const [isSwitchingSubject, setIsSwitchingSubject] = useState(false);
-    const [category, setCategory] = useState("Taylor Swift");
-    const [author, setAuthor] = useState("Taylor Swift");
+    const [category, setCategory] = useState("chuck-norris");
+    const [text, setText] = useState("");
+    const [author, setAuthor] = useState("");
 
     useEffect(() => {
-        if (category === "Taylor Swift") {
-            fetchTaylorSwiftQuote();
-        } else if (category === "Programming") {
-            fetchProgrammingQuote();
-        } else if (category === "Anime") {
-            fetchAnimeQuote();
-        } else if (category === "Chuck Norris") {
-            fetchChuckNorrisQuote();
-        } else if (category === "Kanye West") {
-            fetchKanyeQuote();
-        } else {
-            setText("Sorry, could not get quote");
-        }
+        quoteCategories.forEach(async (cat) => {
+            if (cat.value === category) {
+                await cat.fetchQuote(setText, setAuthor);
+                setIsLoading(false);
+            }
+        });
     }, [category]);
 
-    async function fetchKanyeQuote() {
-        fetch("https://api.kanye.rest")
-            .then((res) => {
-                res.json().then((jsonRes) => {
-                    const newQuote = jsonRes.quote;
-                    if (newQuote) {
-                        setText('"' + newQuote + '"');
-                        setAuthor("Kanye West");
-                    } else {
-                        setText("Sorry, could not get quote");
-                    }
-                });
-            })
-            .catch((err) => {
-                setText("Sorry, could not get quote");
-            });
-    }
-    async function fetchChuckNorrisQuote() {
-        fetch("https://api.chucknorris.io/jokes/random")
-            .then((res) => {
-                res.json().then((jsonRes) => {
-                    const newQuote = jsonRes.value;
-                    if (newQuote) {
-                        setText('"' + newQuote + '"');
-                        setAuthor("Anonymous");
-                    } else {
-                        setText("Sorry, could not get quote");
-                    }
-                });
-            })
-            .catch((err) => {
-                setText("Sorry, could not get quote");
-            });
-    }
-
-    async function fetchAnimeQuote() {
-        fetch("https://animechan.vercel.app/api/random")
-            .then((res) => {
-                res.json().then((jsonRes) => {
-                    const newQuote = jsonRes.quote;
-                    if (newQuote) {
-                        setText('"' + newQuote + '"');
-                        setAuthor(jsonRes.character + ", " + jsonRes.anime);
-                    } else {
-                        setText("Sorry, could not get quote");
-                    }
-                });
-            })
-            .catch((err) => {
-                setText("Sorry, could not get quote");
-            });
-    }
-
-    async function fetchProgrammingQuote() {
-        fetch("http://quotes.stormconsultancy.co.uk/random.json")
-            .then((res) => {
-                res.json().then((jsonRes) => {
-                    const newQuote = jsonRes.quote;
-                    if (newQuote) {
-                        setText('"' + newQuote + '"');
-                        setAuthor(jsonRes.author);
-                    } else {
-                        setText("Sorry, could not get quote");
-                    }
-                });
-            })
-            .catch((err) => {
-                setText("Sorry, could not get quote");
-            });
-    }
-
-    async function fetchTaylorSwiftQuote() {
-        fetch("https://api.taylor.rest/")
-            .then((res) => {
-                res.json().then((jsonRes) => {
-                    const newQuote = jsonRes.quote;
-                    if (newQuote) {
-                        setText('"' + newQuote + '"');
-                        setAuthor("Taylor Swift");
-                    } else {
-                        setText("Sorry, could not get quote");
-                    }
-                });
-            })
-            .catch((err) => {
-                setText("Sorry, could not get quote");
-            });
+    /**
+     * Callback for when a new category is selected
+     * @param value The new category
+     */
+    function updateContent(value) {
+        setIsLoading(true);
+        setCategory(value);
     }
 
     return (
@@ -122,10 +74,15 @@ export default function QuoteOfTheDay() {
             </div>
             {isSwitchingSubject ? (
                 <SwitchCategory
+                    categories={quoteCategories}
                     cancelClicked={() => setIsSwitchingSubject(false)}
-                    updateCategory={setCategory}
+                    updateCategory={updateContent}
                     currentCategory={category}
                 />
+            ) : isLoading ? (
+                <div className={style.loading}>
+                    <CircularProgress />
+                </div>
             ) : (
                 <div>
                     <p className={style.content}>{text}</p>

@@ -1,60 +1,22 @@
 import PropTypes from "prop-types";
 import { Fab } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import CategoryItem from "./item";
 import style from "./style.module.scss";
 
-function SwitchCategory({ cancelClicked, updateCategory, currentCategory }) {
+function SwitchCategory({ categories, cancelClicked, updateCategory, currentCategory }) {
     return (
         <div className={style.container}>
             <div className={style.listHolder}>
-                <div
-                    className={style.categoryOption}
-                    onClick={() => updateCategory("Taylor Swift")}
-                >
-                    Taylor Swift
-                    {currentCategory === "Taylor Swift" ? (
-                        <RadioButtonCheckedIcon />
-                    ) : (
-                        <RadioButtonUncheckedIcon />
-                    )}
-                </div>
-                <div className={style.categoryOption} onClick={() => updateCategory("Kanye West")}>
-                    Kanye West
-                    {currentCategory === "Kanye West" ? (
-                        <RadioButtonCheckedIcon />
-                    ) : (
-                        <RadioButtonUncheckedIcon />
-                    )}
-                </div>
-                <div
-                    className={style.categoryOption}
-                    onClick={() => updateCategory("Chuck Norris")}
-                >
-                    Chuck Norris
-                    {currentCategory === "Chuck Norris" ? (
-                        <RadioButtonCheckedIcon />
-                    ) : (
-                        <RadioButtonUncheckedIcon />
-                    )}
-                </div>
-                <div className={style.categoryOption} onClick={() => updateCategory("Anime")}>
-                    Anime ( ͡° ͜ʖ ͡°)
-                    {currentCategory === "Anime" ? (
-                        <RadioButtonCheckedIcon />
-                    ) : (
-                        <RadioButtonUncheckedIcon />
-                    )}
-                </div>
-                <div className={style.categoryOption} onClick={() => updateCategory("Programming")}>
-                    Programming
-                    {currentCategory === "Programming" ? (
-                        <RadioButtonCheckedIcon />
-                    ) : (
-                        <RadioButtonUncheckedIcon />
-                    )}
-                </div>
+                {categories.map((cat, index) => (
+                    <CategoryItem
+                        key={`category-${index}`}
+                        value={cat.value}
+                        text={cat.text}
+                        selected={currentCategory === cat.value ? true : false}
+                        clickHandler={() => updateCategory(cat.value)}
+                    />
+                ))}
             </div>
             <div className={style.settingButtonDiv}>
                 <Fab
