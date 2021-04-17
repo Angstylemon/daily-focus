@@ -1,23 +1,18 @@
 import React from "react";
 import { shallow } from "enzyme";
 import ShallowRenderer from "react-test-renderer/shallow";
+import Button from "@material-ui/core/Button";
 
 import QuoteContent from "../QuoteContent";
 
-let component;
+let state;
 
 function setIsSwitchingSubject(boolean) {
-    return boolean;
+    state = boolean;
 }
 
 beforeEach(() => {
-    component = shallow(
-        <QuoteContent
-            text="Loren Ipsum"
-            author="Dolor"
-            setIsSwitchingSubject={setIsSwitchingSubject}
-        />
-    );
+    state = false;
 });
 
 test("it renders correctly", () => {
@@ -32,4 +27,14 @@ test("it renders correctly", () => {
     expect(snapshotComponent).toMatchSnapshot();
 });
 
-// need to do tests with the button click changes
+test("When button is pressed, the component changes state", () => {
+    const wrapper = shallow(
+        <QuoteContent
+            text="Loren Ipsum"
+            author="Dolor"
+            setIsSwitchingSubject={setIsSwitchingSubject}
+        />
+    );
+    wrapper.find(".settingButton").simulate("click");
+    expect(state).toBe(true);
+});

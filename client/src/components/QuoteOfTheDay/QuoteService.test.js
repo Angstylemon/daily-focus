@@ -7,11 +7,11 @@ import {
 } from "./quoteService";
 
 function setText(text) {
-    console.log(text);
+    return text;
 }
 
 function setAuthor(author) {
-    console.log(author);
+    return author;
 }
 
 test("It fetches Kanye West quotes correctly", () => {
