@@ -5,6 +5,7 @@ import CalendarWidget from "../CalendarWidget";
 import Timer from "../Timer";
 import ToDoList from "../ToDoList";
 import QuoteOfTheDay from "../QuoteOfTheDay";
+import SpotifyWidget from "../SpotifyWidget";
 
 function Body({ selectedWidgets, setSelectedWidgets }) {
     return (
@@ -29,6 +30,11 @@ function Body({ selectedWidgets, setSelectedWidgets }) {
                     {selectedWidgets.includes("Quote Of The Day") && (
                         <div className={styles.widget}>
                             <QuoteOfTheDay />
+                        </div>
+                    )}
+                    {selectedWidgets.includes("Spotify") && (
+                        <div className={styles.widget}>
+                            <SpotifyWidget />
                         </div>
                     )}
                 </div>

@@ -9,6 +9,7 @@ import toDoList from "../../images/toDoList.svg";
 import calendar from "../../images/calendar.svg";
 import quoteOfTheDay from "../../images/quote-of-the-day.svg";
 import timer from "../../images/timer.svg";
+import spotify from "../../images/spotify.svg";
 import styles from "./style.module.scss";
 import WidgetIcon from "./WidgetIcon";
 
@@ -71,6 +72,12 @@ function SelectWidgetsModal({ selectedWidgets, setSelectedWidgets }) {
                         <WidgetIcon
                             image={quoteOfTheDay}
                             label="Quote Of The Day"
+                            selectedWidgets={selectedWidgets}
+                            setSelectedWidgets={setSelectedWidgets}
+                        />
+                        <WidgetIcon
+                            image={spotify}
+                            label="Spotify"
                             selectedWidgets={selectedWidgets}
                             setSelectedWidgets={setSelectedWidgets}
                         />
