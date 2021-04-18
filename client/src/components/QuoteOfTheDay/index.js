@@ -6,7 +6,7 @@ import SwitchCategory from "./SwitchCategory";
 import QuoteContent from "./QuoteContent";
 import {
     fetchKanyeQuote,
-    fetchChuckNorrisQuote,
+    fetchInspirationalQuote,
     fetchTaylorSwiftQuote,
     fetchProgrammingQuote,
     fetchAnimeQuote,
@@ -14,10 +14,10 @@ import {
 
 const quoteCategories = [
     {
-        value: "chuck-norris",
-        text: "Chuck Norris",
+        value: "inspirational",
+        text: "Inspirational",
         fetchQuote: (textHandler, authorHandler) =>
-            fetchChuckNorrisQuote(textHandler, authorHandler),
+            fetchInspirationalQuote(textHandler, authorHandler),
     },
     {
         value: "taylor-swift",
@@ -48,7 +48,7 @@ const useQuoteCategoryState = createPersistedState("quoteCategory");
 export default function QuoteOfTheDay() {
     const [isLoading, setIsLoading] = useState(true);
     const [isSwitchingSubject, setIsSwitchingSubject] = useState(false);
-    const [category, setCategory] = useQuoteCategoryState("chuck-norris");
+    const [category, setCategory] = useQuoteCategoryState("inspirational");
     const [text, setText] = useState("");
     const [author, setAuthor] = useState("");
 

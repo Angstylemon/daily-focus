@@ -1,6 +1,6 @@
 import {
     fetchKanyeQuote,
-    fetchChuckNorrisQuote,
+    fetchInspirationalQuote,
     fetchTaylorSwiftQuote,
     fetchProgrammingQuote,
     fetchAnimeQuote,
@@ -20,10 +20,10 @@ test("It fetches Kanye West quotes correctly", () => {
     expect(author === "Kanye West");
 });
 
-test("It fetches Chuck Norris quotes correctly", () => {
-    let { text, author } = fetchChuckNorrisQuote(setText, setAuthor);
+test("It fetches inspirational quotes correctly", () => {
+    let { text, author } = fetchInspirationalQuote(setText, setAuthor);
     expect(text !== "");
-    expect(author === "Anonymous");
+    expect(author != "");
 });
 
 test("It fetches Taylor Swift quotes correctly", () => {
