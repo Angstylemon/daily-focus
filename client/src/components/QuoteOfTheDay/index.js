@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Fab, CircularProgress } from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { CircularProgress } from "@material-ui/core";
 import style from "./style.module.scss";
 import SwitchCategory from "./SwitchCategory";
+import QuoteContent from "./QuoteContent";
 import {
     fetchKanyeQuote,
     fetchChuckNorrisQuote,
@@ -84,20 +84,11 @@ export default function QuoteOfTheDay() {
                     <CircularProgress />
                 </div>
             ) : (
-                <div>
-                    <p className={style.content}>{text}</p>
-                    <p className={style.author}>{"- " + author}</p>
-                    <div className={style.settingButtonDiv}>
-                        <Fab
-                            className={style.settingButton}
-                            color="primary"
-                            size="medium"
-                            onClick={() => setIsSwitchingSubject(true)}
-                        >
-                            <SettingsIcon />
-                        </Fab>
-                    </div>
-                </div>
+                <QuoteContent
+                    text={text}
+                    author={author}
+                    setIsSwitchingSubject={setIsSwitchingSubject}
+                />
             )}
         </div>
     );
