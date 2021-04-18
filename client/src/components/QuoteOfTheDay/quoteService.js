@@ -6,13 +6,14 @@ async function fetchKanyeQuote(setText, setAuthor) {
                 if (newQuote) {
                     setText('"' + newQuote + '"');
                     setAuthor("Kanye West");
+                    return { text: '"' + newQuote + '"', author: "Kanye West" };
                 } else {
                     setText("Sorry, could not get quote");
                     setAuthor("");
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -26,13 +27,14 @@ async function fetchChuckNorrisQuote(setText, setAuthor) {
                 if (newQuote) {
                     setText('"' + newQuote + '"');
                     setAuthor("Anonymous");
+                    return { text: '"' + newQuote + '"', author: "Anonymous" };
                 } else {
                     setText("Sorry, could not get quote");
                     setAuthor("");
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -46,13 +48,14 @@ async function fetchProgrammingQuote(setText, setAuthor) {
                 if (newQuote) {
                     setText('"' + newQuote + '"');
                     setAuthor(jsonRes.author);
+                    return { text: '"' + newQuote + '"', author: jsonRes.author };
                 } else {
                     setText("Sorry, could not get quote");
                     setAuthor("");
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -66,13 +69,14 @@ async function fetchTaylorSwiftQuote(setText, setAuthor) {
                 if (newQuote) {
                     setText('"' + newQuote + '"');
                     setAuthor("Taylor Swift");
+                    return { text: '"' + newQuote + '"', author: "Taylor Swift" };
                 } else {
                     setText("Sorry, could not get quote");
                     setAuthor("");
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });
@@ -86,13 +90,17 @@ async function fetchAnimeQuote(setText, setAuthor) {
                 if (newQuote) {
                     setText('"' + newQuote + '"');
                     setAuthor(jsonRes.character + ", " + jsonRes.anime);
+                    return {
+                        text: '"' + newQuote + '"',
+                        author: jsonRes.character + ", " + jsonRes.anime,
+                    };
                 } else {
                     setText("Sorry, could not get quote");
                     setAuthor("");
                 }
             });
         })
-        .catch((err) => {
+        .catch(() => {
             setText("Sorry, could not get quote");
             setAuthor("");
         });

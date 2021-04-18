@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Fab, CircularProgress } from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/Settings";
+import createPersistedState from "use-persisted-state";
+import { CircularProgress } from "@material-ui/core";
 import style from "./style.module.scss";
 import SwitchCategory from "./SwitchCategory";
+import QuoteContent from "./QuoteContent";
 import {
     fetchKanyeQuote,
     fetchChuckNorrisQuote,
@@ -42,10 +43,12 @@ const quoteCategories = [
     },
 ];
 
+const useQuoteCategoryState = createPersistedState("quoteCategory");
+
 export default function QuoteOfTheDay() {
     const [isLoading, setIsLoading] = useState(true);
     const [isSwitchingSubject, setIsSwitchingSubject] = useState(false);
-    const [category, setCategory] = useState("chuck-norris");
+    const [category, setCategory] = useQuoteCategoryState("chuck-norris");
     const [text, setText] = useState("");
     const [author, setAuthor] = useState("");
 
@@ -84,20 +87,11 @@ export default function QuoteOfTheDay() {
                     <CircularProgress />
                 </div>
             ) : (
-                <div>
-                    <p className={style.content}>{text}</p>
-                    <p className={style.author}>{"- " + author}</p>
-                    <div className={style.settingButtonDiv}>
-                        <Fab
-                            className={style.settingButton}
-                            color="primary"
-                            size="medium"
-                            onClick={() => setIsSwitchingSubject(true)}
-                        >
-                            <SettingsIcon />
-                        </Fab>
-                    </div>
-                </div>
+                <QuoteContent
+                    text={text}
+                    author={author}
+                    setIsSwitchingSubject={setIsSwitchingSubject}
+                />
             )}
         </div>
     );
