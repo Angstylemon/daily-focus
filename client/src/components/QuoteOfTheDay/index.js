@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import createPersistedState from "use-persisted-state";
 import { CircularProgress } from "@material-ui/core";
 import style from "./style.module.scss";
 import SwitchCategory from "./SwitchCategory";
@@ -42,10 +43,12 @@ const quoteCategories = [
     },
 ];
 
+const useQuoteCategoryState = createPersistedState("quoteCategory");
+
 export default function QuoteOfTheDay() {
     const [isLoading, setIsLoading] = useState(true);
     const [isSwitchingSubject, setIsSwitchingSubject] = useState(false);
-    const [category, setCategory] = useState("chuck-norris");
+    const [category, setCategory] = useQuoteCategoryState("chuck-norris");
     const [text, setText] = useState("");
     const [author, setAuthor] = useState("");
 
