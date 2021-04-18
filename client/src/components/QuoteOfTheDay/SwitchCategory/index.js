@@ -1,10 +1,18 @@
 import PropTypes from "prop-types";
-import { Fab } from "@material-ui/core";
+import { makeStyles, Fab } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import CategoryItem from "./item";
 import style from "./style.module.scss";
 
+const useStyles = makeStyles({
+    btn: {
+        background: "#30A0F5",
+    },
+});
+
 function SwitchCategory({ categories, cancelClicked, updateCategory, currentCategory }) {
+    const classes = useStyles();
+
     return (
         <div className={style.container}>
             <div className={style.listHolder}>
@@ -24,6 +32,7 @@ function SwitchCategory({ categories, cancelClicked, updateCategory, currentCate
                     color="primary"
                     size="medium"
                     onClick={() => cancelClicked()}
+                    classes={{ root: classes.btn }}
                 >
                     <ArrowBackIcon />
                 </Fab>

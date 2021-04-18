@@ -19,15 +19,16 @@ async function fetchKanyeQuote(setText, setAuthor) {
         });
 }
 
-async function fetchChuckNorrisQuote(setText, setAuthor) {
-    await fetch("https://api.chucknorris.io/jokes/random")
+async function fetchInspirationalQuote(setText, setAuthor) {
+    await fetch("https://type.fit/api/quotes")
         .then((res) => {
             res.json().then((jsonRes) => {
-                const newQuote = jsonRes.value;
+                const quoteIndex = Math.floor(Math.random() * jsonRes.length);
+                const newQuote = jsonRes[quoteIndex];
                 if (newQuote) {
-                    setText('"' + newQuote + '"');
-                    setAuthor("Anonymous");
-                    return { text: '"' + newQuote + '"', author: "Anonymous" };
+                    setText('"' + newQuote.text + '"');
+                    setAuthor(newQuote.author);
+                    return { text: '"' + newQuote.text + '"', author: newQuote.author };
                 } else {
                     setText("Sorry, could not get quote");
                     setAuthor("");
@@ -108,7 +109,7 @@ async function fetchAnimeQuote(setText, setAuthor) {
 
 export {
     fetchKanyeQuote,
-    fetchChuckNorrisQuote,
+    fetchInspirationalQuote,
     fetchTaylorSwiftQuote,
     fetchProgrammingQuote,
     fetchAnimeQuote,

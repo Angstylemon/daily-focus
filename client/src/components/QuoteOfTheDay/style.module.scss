@@ -41,4 +41,16 @@
             color: #30a0f5;
         }
     }
+
+    .loading {
+        width: 100%;
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            color: #30a0f5;
+        }
+    }
 }

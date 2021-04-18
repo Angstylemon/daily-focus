@@ -17,6 +17,11 @@ exports[`it renders correctly 1`] = `
   >
     <WithStyles(ForwardRef(Fab))
       className="settingButton"
+      classes={
+        Object {
+          "root": "makeStyles-btn-1",
+        }
+      }
       color="primary"
       onClick={[Function]}
       size="medium"
