@@ -8,10 +8,10 @@ import {
 
 let text;
 let author;
-function setText(newText) {
+async function setText(newText) {
     text = newText;
 }
-function setAuthor(newAuthor) {
+async function setAuthor(newAuthor) {
     author = newAuthor;
 }
 
@@ -20,52 +20,52 @@ beforeEach(() => {
     author = "";
 });
 
-test("It fetches Kanye West quotes correctly", () => {
-    fetchKanyeQuote(setText, setAuthor).then(() => {
-        expect(text).toBeInstanceOf(String);
-        expect(author).toBeInstanceOf(String);
-        expect(text).not.toEqual("");
-        expect(text).not.toEqual("Sorry, could not get quote");
-        expect(author).toEqual("Kanye West");
-    });
+test("It fetches Kanye West quotes correctly", async () => {
+    await fetchKanyeQuote(setText, setAuthor);
+
+    expect(typeof text).toBe("string");
+    expect(typeof author).toBe("string");
+    expect(text).not.toEqual("");
+    expect(text).not.toEqual("Sorry, could not get quote");
+    expect(author).toEqual("Kanye West");
 });
 
-test("It fetches inspirational quotes correctly", () => {
-    fetchInspirationalQuote(setText, setAuthor).then(() => {
-        expect(text).toBeInstanceOf(String);
-        expect(author).toBeInstanceOf(String);
-        expect(text).not.toEqual("");
-        expect(text).not.toEqual("Sorry, could not get quote");
-        expect(author).not.toEqual("");
-    });
+test("It fetches inspirational quotes correctly", async () => {
+    await fetchInspirationalQuote(setText, setAuthor);
+
+    expect(typeof text).toBe("string");
+    expect(typeof author).toBe("string");
+    expect(text).not.toEqual("");
+    expect(text).not.toEqual("Sorry, could not get quote");
+    expect(author).not.toEqual("");
 });
 
-test("It fetches Taylor Swift quotes correctly", () => {
-    fetchTaylorSwiftQuote(setText, setAuthor).then(() => {
-        expect(text).toBeInstanceOf(String);
-        expect(author).toBeInstanceOf(String);
-        expect(text).not.toEqual("");
-        expect(text).not.toEqual("Sorry, could not get quote");
-        expect(author).toEqual("Taylor Swift");
-    });
+test("It fetches Taylor Swift quotes correctly", async () => {
+    await fetchTaylorSwiftQuote(setText, setAuthor);
+
+    expect(typeof text).toBe("string");
+    expect(typeof author).toBe("string");
+    expect(text).not.toEqual("");
+    expect(text).not.toEqual("Sorry, could not get quote");
+    expect(author).toEqual("Taylor Swift");
 });
 
-test("It fetches programming quotes correctly", () => {
-    fetchProgrammingQuote(setText, setAuthor).then(() => {
-        expect(text).toBeInstanceOf(String);
-        expect(author).toBeInstanceOf(String);
-        expect(text).not.toEqual("");
-        expect(text).not.toEqual("Sorry, could not get quote");
-        expect(author).not.toEqual("");
-    });
+test("It fetches programming quotes correctly", async () => {
+    await fetchProgrammingQuote(setText, setAuthor);
+
+    expect(typeof text).toBe("string");
+    expect(typeof author).toBe("string");
+    expect(text).not.toEqual("");
+    expect(text).not.toEqual("Sorry, could not get quote");
+    expect(author).not.toEqual("");
 });
 
-test("It fetches anime quotes correctly", () => {
-    fetchAnimeQuote(setText, setAuthor).then(() => {
-        expect(text).toBeInstanceOf(String);
-        expect(author).toBeInstanceOf(String);
-        expect(text).not.toEqual("");
-        expect(text).not.toEqual("Sorry, could not get quote");
-        expect(author).not.toEqual("");
-    });
+test("It fetches anime quotes correctly", async () => {
+    await fetchAnimeQuote(setText, setAuthor);
+
+    expect(typeof text).toBe("string");
+    expect(typeof author).toBe("string");
+    expect(text).not.toEqual("");
+    expect(text).not.toEqual("Sorry, could not get quote");
+    expect(author).not.toEqual("");
 });

@@ -1,7 +1,7 @@
 async function fetchKanyeQuote(setText, setAuthor) {
     return fetch("https://api.kanye.rest")
-        .then((res) => {
-            res.json().then((jsonRes) => {
+        .then(async (res) => {
+            return res.json().then((jsonRes) => {
                 const newQuote = jsonRes.quote;
                 if (newQuote) {
                     setText('"' + newQuote + '"');
@@ -20,8 +20,8 @@ async function fetchKanyeQuote(setText, setAuthor) {
 
 async function fetchInspirationalQuote(setText, setAuthor) {
     return fetch("https://type.fit/api/quotes")
-        .then((res) => {
-            res.json().then((jsonRes) => {
+        .then(async (res) => {
+            return res.json().then((jsonRes) => {
                 const quoteIndex = Math.floor(Math.random() * jsonRes.length);
                 const newQuote = jsonRes[quoteIndex];
                 if (newQuote) {
@@ -41,8 +41,8 @@ async function fetchInspirationalQuote(setText, setAuthor) {
 
 async function fetchProgrammingQuote(setText, setAuthor) {
     return fetch("http://quotes.stormconsultancy.co.uk/random.json")
-        .then((res) => {
-            res.json().then((jsonRes) => {
+        .then(async (res) => {
+            return res.json().then((jsonRes) => {
                 const newQuote = jsonRes.quote;
                 if (newQuote) {
                     setText('"' + newQuote + '"');
@@ -61,8 +61,8 @@ async function fetchProgrammingQuote(setText, setAuthor) {
 
 async function fetchTaylorSwiftQuote(setText, setAuthor) {
     return fetch("https://api.taylor.rest/")
-        .then((res) => {
-            res.json().then((jsonRes) => {
+        .then(async (res) => {
+            return res.json().then((jsonRes) => {
                 const newQuote = jsonRes.quote;
                 if (newQuote) {
                     setText('"' + newQuote + '"');
@@ -81,8 +81,8 @@ async function fetchTaylorSwiftQuote(setText, setAuthor) {
 
 async function fetchAnimeQuote(setText, setAuthor) {
     return fetch("https://animechan.vercel.app/api/random")
-        .then((res) => {
-            res.json().then((jsonRes) => {
+        .then(async (res) => {
+            return res.json().then((jsonRes) => {
                 const newQuote = jsonRes.quote;
                 if (newQuote) {
                     setText('"' + newQuote + '"');
