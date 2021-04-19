@@ -68,4 +68,4 @@ test("It fetches anime quotes correctly", async () => {
     expect(text).not.toEqual("");
     expect(text).not.toEqual("Sorry, could not get quote");
     expect(author).not.toEqual("");
-});
+}, 10000);
