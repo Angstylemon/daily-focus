@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core";
 import toDoList from "../../images/toDoList.svg";
 import calendar from "../../images/calendar.svg";
+import quoteOfTheDay from "../../images/quote-of-the-day.svg";
 import timer from "../../images/timer.svg";
 import spotify from "../../images/spotify.svg";
 import styles from "./style.module.scss";
@@ -71,12 +72,18 @@ function SelectWidgetsModal({ selectedWidgets, setSelectedWidgets }) {
                             setSelectedWidgets={setSelectedWidgets}
                         />
                         <WidgetIcon
+                            image={quoteOfTheDay}
+                            label="Quote Of The Day"
+                            selectedWidgets={selectedWidgets}
+                            setSelectedWidgets={setSelectedWidgets}
+                        />
+                        <WidgetIcon
                             image={newsWidget}
                             label="News Widget"
                             selectedWidgets={selectedWidgets}
                             setSelectedWidgets={setSelectedWidgets}
                         />
-                         <WidgetIcon
+                        <WidgetIcon
                             image={FactOfTheDay}
                             label="Fact Of The Day"
                             selectedWidgets={selectedWidgets}
