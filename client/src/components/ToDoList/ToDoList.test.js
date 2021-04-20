@@ -45,11 +45,19 @@ test("Add a todo item", () => {
 test("Interaction on todo item", () => {
     const wrapper = shallow(<ToDoList />);
     wrapper.find(TodaysToDo).props().switchToAdd();
-    wrapper.find(AddToDo).props().addClicked(moment().format("YYYY-MM-D"), "00:00", "Testing", "Hello world from test");
+    wrapper
+        .find(AddToDo)
+        .props()
+        .addClicked(moment().format("YYYY-MM-D"), "00:00", "Testing", "Hello world from test");
     let todaysTodoWrapper = wrapper.find(TodaysToDo).shallow();
 
     // Checked
-    todaysTodoWrapper.find(ToDoItem).shallow().find("WithStyles(ForwardRef(Checkbox))").props().onChange();
+    todaysTodoWrapper
+        .find(ToDoItem)
+        .shallow()
+        .find("WithStyles(ForwardRef(Checkbox))")
+        .props()
+        .onChange();
     todaysTodoWrapper = wrapper.find(TodaysToDo).shallow();
     expect(todaysTodoWrapper.find(ToDoItem).at(0).props().checked).toBe(true);
 
