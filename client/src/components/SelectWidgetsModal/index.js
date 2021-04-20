@@ -14,7 +14,6 @@ import WidgetIcon from "./WidgetIcon";
 import newsWidget from "../../images/news-widget.svg";
 import FactOfTheDay from "../../images/factOfTheDay.svg";
 
-
 const useStyles = makeStyles({
     button: {
         background: "#30A0F5",
