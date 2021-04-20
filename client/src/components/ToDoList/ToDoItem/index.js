@@ -24,14 +24,37 @@ const useStyles = makeStyles({
     subItem: {
         paddingTop: 0,
         paddingBottom: 0,
+        display: "flex",
+        flexWrap: "wrap",
+    },
+    todoInputTextField: {
+        width: "100%",
+        margin: "10px 0",
     },
 });
 
-function ToDoItem({ checked, title, time, details, onDelete, onCheckboxClicked, onEdit }) {
+function ToDoItem({
+    checked,
+    title,
+    startTime,
+    endTime,
+    startDate,
+    endDate,
+    details,
+    onDelete,
+    onCheckboxClicked,
+    onEdit,
+}) {
     const [openDetails, setOpenDetails] = useState(false);
-    const [isTimeEditing, setIsTimeEditing] = useState(false);
+    const [isStartTimeEditing, setIsStartTimeEditing] = useState(false);
+    const [isEndTimeEditing, setIsEndTimeEditing] = useState(false);
+    const [isStartDateEditing, setIsStartDateEditing] = useState(false);
+    const [isEndDateEditing, setIsEndDateEditing] = useState(false);
     const [isDetailsEditing, setIsDetailsEditing] = useState(false);
-    const [editedTime, setEditedTime] = useState(time);
+    const [editedStartTime, setEditedStartTime] = useState(startTime);
+    const [editedEndTime, setEditedEndTime] = useState(endTime);
+    const [editedStartDate, setEditedStartDate] = useState(startDate);
+    const [editedEndDate, setEditedEndDate] = useState(endDate);
     const [editedDetails, setEditedDetails] = useState(details);
 
     const classes = useStyles();
@@ -68,25 +91,60 @@ function ToDoItem({ checked, title, time, details, onDelete, onCheckboxClicked, 
                 <List component="div" disablePadding>
                     <ListItem classes={{ root: classes.subItem }}>
                         <ListItemIcon />
-                        {isTimeEditing ? (
-                            <TextField
-                                type="time"
-                                defaultValue={time}
-                                onBlur={() => {
-                                    onEdit("time", editedTime);
-                                    setIsTimeEditing(false);
-                                }}
-                                onChange={(e) => setEditedTime(e.target.value)}
-                                autoFocus
-                            />
-                        ) : (
-                            <ListItemText
-                                primary={moment(time, "HH:mm").format("h:mma")}
-                                style={{ color: "grey" }}
-                                onClick={() => setIsTimeEditing(true)}
-                            />
-                        )}
+                        <ListItemText primary={"Start:"} />
+                        &nbsp;
+                        <TextField
+                            type="time"
+                            defaultValue={startTime}
+                            onBlur={() => {
+                                onEdit("startTime", editedStartTime);
+                                setIsStartTimeEditing(!isStartDateEditing);
+                            }}
+                            onChange={(e) => setEditedStartTime(e.target.value)}
+                            autoFocus
+                            margin="20px"
+                        />
+                        &nbsp;
+                        <TextField
+                            className={classes.todoInputTextField}
+                            variant="outlined"
+                            type="date"
+                            defaultValue={editedStartDate}
+                            onChange={(e) => {
+                                onEdit("startDate", editedStartDate);
+                                setIsStartDateEditing(false);
+                                setEditedStartDate(e.target.value);
+                            }}
+                        />
                     </ListItem>
+                    <ListItem classes={{ root: classes.subItem }}>
+                        <ListItemIcon />
+                        <ListItemText primary={"End:"} />
+                        &nbsp;
+                        <TextField
+                            type="time"
+                            defaultValue={endTime}
+                            onBlur={() => {
+                                onEdit("endTime", editedEndTime);
+                                setIsEndTimeEditing(!isStartTimeEditing);
+                            }}
+                            onChange={(e) => setEditedEndTime(e.target.value)}
+                            autoFocus
+                        />
+                        &nbsp;
+                        <TextField
+                            className={classes.todoInputTextField}
+                            variant="outlined"
+                            type="date"
+                            defaultValue={editedEndDate}
+                            onChange={(e) => {
+                                onEdit("endDate", editedEndDate);
+                                setEditedEndDate(e.target.value);
+                                setIsEndDateEditing(false);
+                            }}
+                        />
+                    </ListItem>
+
                     <ListItem classes={{ root: classes.subItem }}>
                         <ListItemIcon />
                         {isDetailsEditing ? (
@@ -117,7 +175,7 @@ function ToDoItem({ checked, title, time, details, onDelete, onCheckboxClicked, 
 ToDoItem.propTypes = {
     checked: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
+    startTime: PropTypes.string.isRequired,
     details: PropTypes.string.isRequired,
     onDelete: PropTypes.func.isRequired,
     onCheckboxClicked: PropTypes.func.isRequired,

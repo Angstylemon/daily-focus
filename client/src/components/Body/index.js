@@ -36,7 +36,7 @@ function Body({ selectedWidgets, setSelectedWidgets }) {
                         <div className={styles.widget}>
                             <Weather />
                         </div>
-                      )}
+                    )}
                     {selectedWidgets.includes("Quote Of The Day") && (
                         <div className={styles.widget}>
                             <QuoteOfTheDay />
